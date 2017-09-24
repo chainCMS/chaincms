@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>test-element</title>
+
+    <script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../../../bower_components/web-component-tester/browser.js"></script>
+
+  <!-- Import the element to test -->
+  <link rel="import" href="../test-element.html">
+
+</head>
+<body>
+
+  <test-fixture id="basic">
+    <template>
+      <test-element></test-element>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('test-element tests', function() {
+        let el;
+        let span;
+
+    setup(function() {
+      el = fixture('basic');
+    });
+
+    test('Hello world as default', function() {
+      span = el.$$('span');
+      expect(span.textContent).to.equal('Hello world!');
+    });
+
+  });
+  </script>
+</body>
+</html>

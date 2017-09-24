@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>my-counter demo</title>
+
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="my-counter.html">
+
+    <style>
+      body {
+        background-color: #fafafa; 
+      }
+    </style>
+  </head>
+  <body>
+    <x-demo></x-demo>
+    <dom-module id="x-demo">
+      <template>
+        <style>
+          .horizontal-section {
+            min-width: 200px;
+            max-width: 400px;
+          }
+          h3 {
+            margin: 20px 0 10px 0;
+            border-bottom: 1px solid #ccc;
+          }
+        </style>
+        <div class="vertical-section-container centered">
+
+          <h3>Basic my-counter demo</h3>
+          <div class="horizontal-section">
+            <my-counter
+              value="[[value]]"
+              on-increment="onIncrement"
+              on-decrement="onDecrement">
+            </my-counter>
+          </div>
+
+        </div>
+      </template>
+    </dom-module>
+
+    <script>
+      Polymer({
+        is: 'x-demo',
+        ready: function() {
+          this.value = 42;
+        },
+        onIncrement: function() {
+          this.value++;
+        },
+        onDecrement: function() {
+          this.value--;
+        }
+      });
+    </script>
+  </body>
+</html>

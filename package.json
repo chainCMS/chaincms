@@ -1,0 +1,27 @@
+{
+  "name": "chaincms",
+  "version": "0.0.1",
+  "description": "chainCMS is a content management system based on the steem blockchain. Our goal is to provide creators with a powerful, scalable, and cost effective tool for publishing content that can be installed on their own servers for free.",
+  "main": "index.html",
+  "repository": "https://github.com/chainCMS/chaincms.git",
+  "author": "Hoxly Inc.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node node_modules/polymer-cli/bin/polymer.js lint -r polymer-2 && node node_modules/polymer-cli/bin/polymer.js test",
+    "start": "node node_modules/polymer-cli/bin/polymer.js serve",
+    "build": "node node_modules/bower/bin/bower install && node node_modules/polymer-cli/bin/polymer.js build",
+    "polymer-install": "node node_modules/polymer-cli/bin/polymer.js install",
+    "new-el": "node node_modules/yo/lib/cli.js polymer-init-redux:el"
+  },
+  "dependencies": {
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "steem": "^0.6.4"
+  },
+  "devDependencies": {
+    "generator-polymer-init-redux": "^0.1.0",
+    "polymer-cli": "^1.5.5",
+    "wd": "^1.4.1",
+    "yo": "^2.0.0"
+  }
+}

@@ -1,0 +1,85 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<link rel="import" href="../my-counter/my-counter.html">
+<link rel="import" href="../chaincms-app/store.html">
+
+<dom-module id="my-view2">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+    </style>
+
+    <app-route
+      route="{{route}}"
+      pattern="/:counterVal"
+      data="{{routeData}}"></app-route>
+
+    <div class="card">
+
+      <div class="circle">2</div>
+      <h1>Route bound value</h1>
+      <p>Value of this counter is bound to URL address. It also creates a new history entry on each click.</p>
+      <my-counter
+        value="[[boundCounter]]"
+        on-increment="_onCounterIncrement"
+        on-decrement="_onCounterDecrement">
+      </my-counter>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-view2',
+      behaviors: [ StoreBehavior ],
+      properties: {
+        boundCounter: {
+          type: Number,
+          statePath: 'boundCounter'
+        },
+        screen: {
+          type: String,
+          statePath: 'screen'
+        },
+        route: {
+          type: Object,
+          notify: true
+        }
+      },
+      observers: [
+        '_updateRoute(screen, boundCounter)',
+        '_routeChanged(routeData.counterVal)'
+      ],
+
+      _onCounterIncrement: function() {
+        this.dispatch(Actions.incBoundCounter());
+      },
+      _onCounterDecrement: function() {
+        this.dispatch(Actions.decBoundCounter());
+      },
+
+      // Routing
+
+      _routeChanged: function(strVal) {
+        const counterVal = parseInt(strVal);
+        if (counterVal === this.boundCounter || isNaN(counterVal)) {
+          return;
+        }
+        this.dispatch(Actions.setBoundCounter(counterVal));
+      },
+
+      _updateRoute: function(screen, boundCounter) {
+        if (screen !== 'view2') {
+          return;
+        }
+        this.set('route.path', '/' + boundCounter);
+      }
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="my-counter">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        --my-counter-border: 1px solid #ccc;
+        border: var(--my-counter-border);
+        border-radius: 2px;
+        font-size: 20px;
+      }
+
+      #value {
+        text-align: center;
+        padding: 0.3em;
+        border-bottom: var(--my-counter-border);
+      }
+
+      #buttonBar {
+        display: flex;
+      }
+
+      button {
+        flex: 1;
+        background: none;
+        border: none;
+        border-left: var(--my-counter-border);
+        font-size: inherit;
+        color: inherit;
+        padding: 1px 10px;
+      }
+
+      button:first-child {
+        border-left: none;
+      }
+    </style>
+    <div id="value">
+      [[value]]
+    </div>
+    <div id="buttonBar">
+      <button on-tap="_onDecrementTap">-</button>
+      <button on-tap="_onIncrementTap">+</button>
+    </div>  
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-counter',
+      properties: {
+        value: {
+          type: Number,
+          value: 0
+        }
+      },
+      _onDecrementTap: function() {
+        this.fire('decrement');
+      },
+      _onIncrementTap: function() {
+        this.fire('increment');
+      }
+    })
+  </script>
+</dom-module>
