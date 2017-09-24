@@ -21,6 +21,7 @@
   "devDependencies": {
     "generator-polymer-init-redux": "^0.1.0",
     "polymer-cli": "^1.5.5",
+    "wd": "^1.4.1",
     "yo": "^2.0.0"
   }
 }

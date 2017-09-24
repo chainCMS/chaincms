@@ -7027,7 +7027,7 @@ wct-sauce@^2.0.0-pre.1:
     temp "^0.8.1"
     uuid "^2.0.1"
 
-wd@^1.2.0:
+wd@^1.2.0, wd@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/wd/-/wd-1.4.1.tgz#6b1ab39aab1728ee276c1a2b6d7321da68b16e8c"
   dependencies:
