@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>test-element demo</title>
+
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="test-element.html">
+
+    <style>
+      body {
+        background-color: #fafafa; 
+      }
+    </style>
+  </head>
+  <body>
+    <x-demo></x-demo>
+    <dom-module id="x-demo">
+      <template>
+        <style>
+          .horizontal-section {
+            min-width: 200px;
+            max-width: 400px;
+          }
+          h3 {
+            margin: 20px 0 10px 0;
+            border-bottom: 1px solid #ccc;
+          }
+        </style>
+        <div class="vertical-section-container centered">
+
+          <h3>Basic test-element demo</h3>
+          <div class="horizontal-section">
+            <test-element prop1="[[data]]"></test-element>
+          </div>
+
+        </div>
+      </template>
+    </dom-module>
+
+    <script>
+      Polymer({
+        is: 'x-demo',
+        ready: function() {
+          this.data = 'custom text';
+        }
+      });
+    </script>
+  </body>
+</html>
