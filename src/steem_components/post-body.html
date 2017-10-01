@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html"/>
+<script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+
+<dom-module id="post-body">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div id="body">
+
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'post-body',
+
+      ready: function() {
+        var shadowRoot = this.root
+        steem.api.getContent(this.author, this.permlink, function(err, result) {
+          console.log(err, result);
+          // We are writing the HTML here because <marked-element> activates too
+          // early when placed directly in the template and doesn't update when
+          // result['body'] is inserted.
+          shadowRoot.getElementById('body').innerHTML =
+            "<marked-element><script type=\"text/markdown\">"
+            + result['body'] +
+            "<\/script><div slot=\"markdown-html\"></div></marked-element>"
+        });
+
+      },
+
+      properties: {
+        author: {
+          type: String,
+        },
+        permlink: {
+          type: String,
+        },
+      },
+
+    });
+  </script>
+</dom-module>

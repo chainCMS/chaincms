@@ -3,7 +3,8 @@
 
 <link rel="import" href="../my-counter/my-counter.html">
 <link rel="import" href="../chaincms-app/store.html">
-<link rel="import" href="../steem_components/steem-blog.html" />
+<link rel="import" href="../steem_components/blog-feed.html" />
+<link rel="import" href="../steem_components/post-body.html" />
 
 <dom-module id="my-view1">
   <template>
@@ -24,7 +25,8 @@
           on-decrement="_onCounterDecrement">
         </my-counter>
       </template>
-      <steem-blog></steem-blog>
+      <!-- <blog-feed author="thekyle" limit="5"></blog-feed> -->
+      <post-body author="thekyle" permlink="asksteem-v1-2-angelfish-update"></post-body>
     </div>
   </template>
   <script>

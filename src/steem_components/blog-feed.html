@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+
+<dom-module id="blog-feed">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div id="blog"></div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'blog-feed',
+
+      ready: function() {
+        var shadowRoot = this.root
+        // test to see if author param was passed
+        if (this.author == null) {
+          // if author param was not passed return error
+          shadowRoot.getElementById('blog').innerHTML = "Error: Pass author to &lt;blog-feed author=&quot;AUTHOR USERNAME&quot;&gt;"
+        } else {
+          // if an author wass passed then show their latest posts
+          // https://stackoverflow.com/a/11128791/4333241
+          function createBlog(array) {
+            // Create the list element:
+            var list = document.createElement('ul');
+
+            for (var i = 0; i < array.length; i++) {
+              // Create the list item:
+              var item = document.createElement('li');
+
+              // Set its contents:
+              item.appendChild(document.createTextNode(array[i]['title']));
+
+              // Add it to the list:
+              list.appendChild(item);
+            }
+
+            // Finally, return the constructed list:
+            return list;
+          }
+          // hardcode author (this is just for testing)
+          // var author = 'thekyle'
+          // form JSON query
+          var query = {
+            'tag': this.author,
+            'limit': this.limit
+          }
+          // Get the posts on a specific users blog
+          steem.api.getDiscussionsByBlog(query, function(err, result) {
+            console.log(err, result);
+            // Add the contents of result to #blog:
+            shadowRoot.getElementById('blog').appendChild(createBlog(result));
+          });
+        }
+      },
+
+      properties: {
+        author: {
+          type: String,
+        },
+        limit: {
+          type: Number,
+          value: 10
+        },
+      },
+
+    });
+  </script>
+</dom-module>
